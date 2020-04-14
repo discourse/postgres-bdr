@@ -6,11 +6,11 @@ default: push
 	@printf "${IMAGE}:${TAG} ready\n"
 
 .PHONY: push
-push: build
+push: git-check build
 	docker push ${IMAGE}:${TAG}
 
 .PHONY: build
-build: git-check
+build:
 	docker build --pull --build-arg=http_proxy="${http_proxy}" -t ${IMAGE}:${TAG} .
 
 .PHONY: git-check
